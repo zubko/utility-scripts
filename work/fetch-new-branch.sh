@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Check if there are any changes in the work tree
 if [ -n "$(git status --porcelain)" ]; then
@@ -14,9 +15,19 @@ fi
 echo "Enter the branch name: "
 read branch_name
 
-git fetch origin $branch_name
-git checkout -t origin/$branch_name
+# Check if the branch exists locally
+if git rev-parse --verify --quiet "$branch_name" > /dev/null; then
+    git checkout "$branch_name"
+    branch_type="Local"
+else
+    git checkout -t "origin/$branch_name"
+    branch_type="Remote"
+fi
+
+# Reset the staged changes
 git reset
+
+# Empty commit is needed for time calculation
 git commit -m "empty" --allow-empty
 
-echo "Branch $branch_name has been pulled"
+echo "$branch_type branch '$branch_name' has been checked out"
