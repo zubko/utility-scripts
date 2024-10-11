@@ -15,6 +15,9 @@ fi
 echo "Enter the branch name: "
 read branch_name
 
+# Fetch the latest changes from the remote
+git fetch origin
+
 # Check if the branch exists locally
 if git rev-parse --verify --quiet "$branch_name" > /dev/null; then
     git checkout "$branch_name"
