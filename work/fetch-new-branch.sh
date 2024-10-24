@@ -3,8 +3,9 @@ set -e
 
 # Check if there are any changes in the work tree
 if [ -n "$(git status --porcelain)" ]; then
-    echo "There are changes in the work tree. Are you sure you want to switch to a new branch? (y/n)"
+    echo "There are changes in the work tree. Are you sure you want to switch to a new branch? (Y/n)"
     read confirm
+    confirm=${confirm:-y}
     if [ "$confirm" != "y" ]; then
         echo "Exiting..."
         exit 1
