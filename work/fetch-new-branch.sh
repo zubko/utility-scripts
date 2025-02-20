@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+# Get the branch name from the user
+echo "Enter the branch name: "
+read branch_name
+
 # Check if there are any changes in the work tree
 if [ -n "$(git status --porcelain)" ]; then
     echo "There are changes in the work tree. Are you sure you want to switch to a new branch? (Y/n)"
@@ -11,10 +15,6 @@ if [ -n "$(git status --porcelain)" ]; then
         exit 1
     fi
 fi
-
-# Get the branch name from the user
-echo "Enter the branch name: "
-read branch_name
 
 # Fetch the latest changes from the remote
 git fetch origin
