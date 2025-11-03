@@ -32,6 +32,6 @@ fi
 git reset
 
 # Empty commit is needed for time calculation
-git commit -m "empty" --allow-empty
+git commit -m "empty" --allow-empty --no-verify
 
 echo "$branch_type branch '$branch_name' has been checked out"
